@@ -409,6 +409,7 @@ obj/linuxarmv6l/Release/src/main.o: \
  /home/pi/openFrameworks/libs/openFrameworks/video/ofGstVideoPlayer.h \
  /home/pi/openFrameworks/libs/openFrameworks/3d/ofCamera.h \
  /home/pi/openFrameworks/libs/openFrameworks/3d/ofEasyCam.h \
+ /home/pi/openFrameworks/apps/myApps/audio_game/src/ofApp.h \
  /home/pi/openFrameworks/libs/openFrameworks/app/ofAppNoWindow.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/ofxGPIO.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/gpio.h \
@@ -1280,6 +1281,8 @@ obj/linuxarmv6l/Release/src/main.o: \
 /home/pi/openFrameworks/libs/openFrameworks/3d/ofCamera.h:
 
 /home/pi/openFrameworks/libs/openFrameworks/3d/ofEasyCam.h:
+
+/home/pi/openFrameworks/apps/myApps/audio_game/src/ofApp.h:
 
 /home/pi/openFrameworks/libs/openFrameworks/app/ofAppNoWindow.h:
 
