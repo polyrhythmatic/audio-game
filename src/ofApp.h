@@ -11,6 +11,11 @@ public:
     void update();
     void draw();
     void exit();
+    void begin();
+    void decisionTree();
+    void stopAll();
+    
+    void playSound(ofSoundPlayer & thePlayer, string playerName);
     
     void keyPressed (int key);
     void keyReleased(int key);
@@ -24,8 +29,25 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    
     GPIO gpio17;
-    string state_button;
+    GPIO gpio27;
+    string state_button_17;
+    string state_button_27;
+    
+    ofSoundPlayer silence;
     
     ofSoundPlayer sample;
+    ofSoundPlayer sampleA;
+    ofSoundPlayer sampleB;
+    ofSoundPlayer sampleAA;
+    ofSoundPlayer sampleAB;
+    ofSoundPlayer sampleBB;
+    ofSoundPlayer sampleBA;
+    
+    ofSoundPlayer* currentSample;
+    string currentSampleName;
+    
+    float clickTime;
 };
+
