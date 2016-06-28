@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofAppNoWindow.h"
 #include "ofxGPIO.h"
+#include "GamePlayer.h"
 
 class ofApp : public ofBaseApp{
 
@@ -11,11 +12,6 @@ public:
     void update();
     void draw();
     void exit();
-    void begin();
-    void decisionTree();
-    void stopAll();
-    
-    void playSound(ofSoundPlayer & thePlayer, string playerName);
     
     void keyPressed (int key);
     void keyReleased(int key);
@@ -36,18 +32,9 @@ public:
     string state_button_27;
     
     ofSoundPlayer silence;
-    
-    ofSoundPlayer sample;
-    ofSoundPlayer sampleA;
-    ofSoundPlayer sampleB;
-    ofSoundPlayer sampleAA;
-    ofSoundPlayer sampleAB;
-    ofSoundPlayer sampleBB;
-    ofSoundPlayer sampleBA;
-    
-    ofSoundPlayer* currentSample;
-    string currentSampleName;
-    
+
     float clickTime;
+    
+    GamePlayer gamePlayer;
 };
 

@@ -420,7 +420,8 @@ obj/linuxarmv6l/Release/src/main.o: \
  /home/pi/openFrameworks/addons/ofxGPIO/src/font.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/ReadRawData.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/GETGoogleImage.h \
- /home/pi/openFrameworks/addons/ofxGPIO/src/LED.h
+ /home/pi/openFrameworks/addons/ofxGPIO/src/LED.h \
+ /home/pi/openFrameworks/apps/myApps/audio_game/src/GamePlayer.h
 
 /home/pi/openFrameworks/libs/openFrameworks/ofMain.h:
 
@@ -1305,3 +1306,5 @@ obj/linuxarmv6l/Release/src/main.o: \
 /home/pi/openFrameworks/addons/ofxGPIO/src/GETGoogleImage.h:
 
 /home/pi/openFrameworks/addons/ofxGPIO/src/LED.h:
+
+/home/pi/openFrameworks/apps/myApps/audio_game/src/GamePlayer.h:
