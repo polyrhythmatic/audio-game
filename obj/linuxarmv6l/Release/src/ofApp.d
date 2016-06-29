@@ -420,7 +420,10 @@ obj/linuxarmv6l/Release/src/ofApp.o: \
  /home/pi/openFrameworks/addons/ofxGPIO/src/ReadRawData.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/GETGoogleImage.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/LED.h \
- /home/pi/openFrameworks/apps/myApps/audio_game/src/GamePlayer.h
+ /home/pi/openFrameworks/apps/myApps/audio_game/src/GamePlayer.h \
+ /home/pi/openFrameworks/addons/ofxJSON/src/ofxJSON.h \
+ /home/pi/openFrameworks/addons/ofxJSON/libs/jsoncpp/include/json/json.h \
+ /home/pi/openFrameworks/addons/ofxJSON/src/ofxJSONElement.h
 
 /home/pi/openFrameworks/apps/myApps/audio_game/src/ofApp.h:
 
@@ -1305,3 +1308,9 @@ obj/linuxarmv6l/Release/src/ofApp.o: \
 /home/pi/openFrameworks/addons/ofxGPIO/src/LED.h:
 
 /home/pi/openFrameworks/apps/myApps/audio_game/src/GamePlayer.h:
+
+/home/pi/openFrameworks/addons/ofxJSON/src/ofxJSON.h:
+
+/home/pi/openFrameworks/addons/ofxJSON/libs/jsoncpp/include/json/json.h:
+
+/home/pi/openFrameworks/addons/ofxJSON/src/ofxJSONElement.h:

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "ofAppNoWindow.h"
 #include "ofxGPIO.h"
 #include "GamePlayer.h"
+#include "ofxJSON.h"
 
 class ofApp : public ofBaseApp{
 
@@ -32,6 +32,7 @@ public:
     string state_button_27;
     
     string UID;
+    ofxJSONElement response;
     
     ofSoundPlayer silence;
 
