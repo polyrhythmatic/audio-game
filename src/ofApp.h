@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofAppNoWindow.h"
+//#include "ofAppNoWindow.h"
 #include "ofxGPIO.h"
 #include "GamePlayer.h"
 
@@ -30,6 +30,8 @@ public:
     GPIO gpio27;
     string state_button_17;
     string state_button_27;
+    
+    string UID;
     
     ofSoundPlayer silence;
 

@@ -31,22 +31,22 @@ void GamePlayer::decisionTree(int button){
     //    |			|           |			|
     //    sampleAA	sampleAB	sampleBA 	sampleBB
     if(currentSampleName == "sample"){
-        if(button == "1"){
+        if(button == 1){
             cout<<"you chose button A"<<endl;
             playSound(sampleA, "sampleA");
-        } else if (button == "0"){
+        } else if (button == 0){
             playSound(sampleB, "sampleB");
         }
     } else if(currentSampleName == "sampleA") {
-        if(button == "1"){
+        if(button == 1){
             playSound(sampleAA, "sampleAA");
-        } else if (button == "0"){
+        } else if (button == 0){
             playSound(sampleAB, "sampleAB");
         }
     } else if(currentSampleName == "sampleB") {
-        if(button == "1"){
+        if(button == 1){
             playSound(sampleBA, "sampleBA");
-        } else if (button == "0"){
+        } else if (button == 0){
             playSound(sampleBB, "sampleBB");
         }
     }

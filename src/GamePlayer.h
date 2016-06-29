@@ -8,7 +8,7 @@ class GamePlayer {
 public:
     void setup();
     void start();
-    void decisionTree();
+    void decisionTree(int button);
     void dispose();
     void playSound(ofSoundPlayer & thePlayer, string playerName);
     void stopAll();

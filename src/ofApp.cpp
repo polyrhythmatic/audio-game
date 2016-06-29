@@ -20,6 +20,8 @@ void ofApp::setup(){
 
     gamePlayer.setup();
     gamePlayer.start();
+    
+    UID = "";
 }
 
 //--------------------------------------------------------------
@@ -46,6 +48,14 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+    if(key == 10){
+        ofLog() << "reset";
+        //make the API calls here
+        UID = "";
+    } else {
+        UID += key;
+    }
+    ofLog() << UID;
 }
 
 //--------------------------------------------------------------
