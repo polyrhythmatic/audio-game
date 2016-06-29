@@ -1,31 +1,35 @@
 #ifndef _GAMEPLAYER
-#define _GAMEPLAYER
+    #define _GAMEPLAYER
 
 #include "ofMain.h"
 
 class GamePlayer {
     
-public:
-    void setup();
-    void start();
-    void decisionTree(int button);
-    void dispose();
-    void playSound(ofSoundPlayer & thePlayer, string playerName);
-    void stopAll();
+    public:
+        void setup(string directory);
+        void start();
+        void update();
+        void decisionTree(int button);
+        void dispose();
+        void playSound(ofSoundPlayer & thePlayer, string playerName);
+        void stopAll();
+        bool isOver();
     
-    ofSoundPlayer sample;
-    ofSoundPlayer sampleA;
-    ofSoundPlayer sampleB;
-    ofSoundPlayer sampleAA;
-    ofSoundPlayer sampleAB;
-    ofSoundPlayer sampleBB;
-    ofSoundPlayer sampleBA;
+        ofSoundPlayer sample;
+        ofSoundPlayer sampleA;
+        ofSoundPlayer sampleB;
+        ofSoundPlayer sampleAA;
+        ofSoundPlayer sampleAB;
+        ofSoundPlayer sampleBB;
+        ofSoundPlayer sampleBA;
+        
+        string currentSampleName;
+        ofSoundPlayer * currentSample;
     
-    string currentSampleName;
+        int score;
+        bool gameOver;
     
-    int score;
-    
-    GamePlayer();
+        GamePlayer();
 };
 
 #endif
