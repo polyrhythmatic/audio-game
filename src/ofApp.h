@@ -24,24 +24,32 @@ class ofApp : public ofBaseApp{
         void windowResized(int w, int h);
         void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
-        
-        
+    
+        void startGame();
+        void setScore(string userID, float theScore, string fieldID, string sign);
+        int score;
+    
+        void setupGPIO();
+        void resetGame();
         GPIO gpio17;
-        GPIO gpio27;
+        GPIO gpio18;
+        GPIO gpio26;
         string state_button_17;
-        string state_button_27;
-        
+        string state_button_18;
+        string state_button_26;
+    
         string UID;
-        ofxJSONElement response;
-        
+        string currentUID;
+    
         ofSoundPlayer silence;
-
-        float clickTime;
-        
+        ofSoundPlayer noise;
+    
         GamePlayer gamePlayer1;
         GamePlayer gamePlayer2;
         GamePlayer gamePlayer3;
-        
+    
+        GamePlayer *currentGamePlayer;
+    
         int currentGame;
 };
 

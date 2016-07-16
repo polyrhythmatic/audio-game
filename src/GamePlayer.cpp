@@ -3,67 +3,63 @@
 GamePlayer::GamePlayer(){
 }
 
-void GamePlayer::setup(string directory){
-    sample.load("sounds/" + directory + "/sample.wav");
-    sampleA.load("sounds/" + directory + "/sampleA.wav");
-    sampleB.load("sounds/" + directory + "/sampleB.wav");
-    sampleAA.load("sounds/" + directory + "/sampleAA.wav");
-    sampleBB.load("sounds/" + directory + "/sampleBB.wav");
-    sampleAB.load("sounds/" + directory + "/sampleAB.wav");
-    sampleBA.load("sounds/" + directory + "/sampleBA.wav");
+void GamePlayer::setup(string directory, int num){
+    gameNum = num;
     
-    currentSampleName = "sample";
-    currentSample = &sample;
+    intro.load("sounds/" + directory + "/intro.wav");
+    choiceA.load("sounds/" + directory + "/choiceA.wav");
+    choiceB.load("sounds/" + directory + "/choiceB.wav");
+    
+    currentSampleName = "intro";
+    currentSample = &intro;
     gameOver = false;
 }
 
 void GamePlayer::start(){
-    sample.play();
+    intro.play();
 }
 
+bool GamePlayer::isPlaying(){
+    return currentSample->isPlaying();
+}
 bool GamePlayer::isOver(){
     return gameOver;
 }
 
 void GamePlayer::update(){
-    if((currentSampleName == "sampleAA" || currentSampleName == "sampleAB" || currentSampleName == "sampleBA" || currentSampleName == "sampleBB") && !(currentSample->isPlaying())){
+    if((currentSampleName == "choiceA" || currentSampleName == "choiceB") && !(currentSample->isPlaying())){
         // last sample
         gameOver = true;
     }
 }
 
+int GamePlayer::finalScore(){
+    float score = 0.0;
+    score = round(500.0 * ofRandom(1.0) + (-50.0 * ofRandom(2.0, 5.0)));
+    return ofToInt(ofToString(floor(score)));
+}
+
 void GamePlayer::decisionTree(int button){
-    //GPIO 27 is value 0 for button
+    //GPIO 18 is value 0 for button
     //GPIO 17 is value 1 for button
-    //                  sample
+    //                  intro
     //          ------          ------
     //          |                     |
-    //      sampleA                 sampleB
-    //    ------ ------         ------ ------
-    //    |			|           |			|
-    //    sampleAA	sampleAB	sampleBA 	sampleBB
-    if(currentSampleName == "sample"){
+    //      choiceA                 choiceB
+    if(currentSampleName == "intro"){
+        cout << "in the decision tree" << endl;
         if(button == 1){
-            playSound(sampleA, "sampleA");
+            playSound(choiceA, "choiceA");
         } else if (button == 0){
-            playSound(sampleB, "sampleB");
-        }
-    } else if(currentSampleName == "sampleA") {
-        if(button == 1){
-            playSound(sampleAA, "sampleAA");
-        } else if (button == 0){
-            playSound(sampleAB, "sampleAB");
-        }
-    } else if(currentSampleName == "sampleB") {
-        if(button == 1){
-            playSound(sampleBA, "sampleBA");
-        } else if (button == 0){
-            playSound(sampleBB, "sampleBB");
+            playSound(choiceB, "choiceB");
         }
     }
 }
 
-void GamePlayer::dispose(){
+void GamePlayer::resetPlayer(){
+    currentSampleName = "intro";
+    currentSample = &intro;
+    gameOver = false;
     
 }
 
@@ -75,11 +71,7 @@ void GamePlayer::playSound(ofSoundPlayer & thePlayer, string playerName){
 }
 
 void GamePlayer::stopAll(){
-    sample.stop();
-    sampleA.stop();
-    sampleB.stop();
-    sampleAA.stop();
-    sampleAB.stop();
-    sampleBA.stop();
-    sampleBB.stop();
+    intro.stop();
+    choiceA.stop();
+    choiceB.stop();
 }

@@ -3,48 +3,52 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    gpio17.setup("17");
-    gpio17.export_gpio();
-    gpio17.setdir_gpio("in");
-
-    gpio27.setup("27");
-    gpio27.export_gpio();
-    gpio27.setdir_gpio("in");
+    setupGPIO();
     
+    //this helps reduce noise for some reason
     silence.load("sounds/silence.wav");
     silence.setLoop(true);
     silence.play();
     
+    noise.load("sounds/noise.wav");
+    noise.setLoop(true);
+    noise.play();
     
-    clickTime = 0;
-
-    gamePlayer1.setup("first");
-    gamePlayer2.setup("second");
-    gamePlayer3.setup("third");
-
-    gamePlayer1.start();
+    score = 0;
     
-    currentGame = 1;
+    gamePlayer1.setup("first", 1);
+    gamePlayer2.setup("second", 2);
+    gamePlayer3.setup("third", 3);
+    
+    currentGame = 0;
+    currentGamePlayer = &gamePlayer1;
     
     UID = "";
+    currentUID = "";
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
     gpio17.getval_gpio(state_button_17);
-    gpio27.getval_gpio(state_button_27);
-
+    gpio18.getval_gpio(state_button_18);
+    gpio26.getval_gpio(state_button_26);
+    
+    if(state_button_26 == "1"){
+        ofLog() << "shutdown";
+        ofSystem("sudo shutdown -h now");
+    }
+    //button checking
     int button = -1;
     if(state_button_17 == "1"){
         button = 1;
         cout<<"you chose button A"<<endl;
-    } else if(state_button_27 == "1") {
+        ofLog() << currentGamePlayer->isPlaying();
+    } else if(state_button_18 == "1") {
         button = 0;
         cout<<"you chose button B"<<endl;
     }
-    if(button != -1 && (ofGetElapsedTimef() - clickTime > 5.0)){
-        clickTime = ofGetElapsedTimef();
-
+    
+    if(button != -1 && !(currentGamePlayer->isPlaying())){
         if(currentGame == 1){
             gamePlayer1.decisionTree(button);
         } else if(currentGame == 2){
@@ -58,16 +62,35 @@ void ofApp::update() {
     gamePlayer2.update();
     gamePlayer3.update();
     
-    if(gamePlayer1.isOver()){
+    if(gamePlayer1.isOver() && currentGame == 1){
         currentGame = 2;
+        currentGamePlayer = &gamePlayer2;
         gamePlayer2.start();
-    }
-    if(gamePlayer2.isOver()){
+        score += gamePlayer1.finalScore();
+    } else if(gamePlayer2.isOver() && currentGame == 2){
         currentGame = 3;
+        currentGamePlayer = &gamePlayer3;
         gamePlayer3.start();
-    }
-    if(gamePlayer3.isOver()){
+        score += gamePlayer2.finalScore();
+    } else if(gamePlayer3.isOver() && currentGame == 3){
+        currentGame = 0;
+        currentGamePlayer = &gamePlayer1;
+        score += gamePlayer3.finalScore();
+        ofLog() << score;
+        setScore(currentUID, score, "81", "+");
+        setScore(currentUID, score, "77", "");
+        score = 0;
+        currentUID = "";
+        gamePlayer1.resetPlayer();
+        gamePlayer2.resetPlayer();
+        gamePlayer3.resetPlayer();
         //do something with the end here
+    }
+    
+    if(currentGamePlayer->isPlaying() && noise.isPlaying()){
+        noise.setPaused(true);
+    } else if(!currentGamePlayer->isPlaying() && !noise.isPlaying() && currentGame == 0){
+        noise.setPaused(false);
     }
 }
 
@@ -78,7 +101,8 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::exit() {
     gpio17.unexport_gpio();
-    gpio27.unexport_gpio();
+    gpio18.unexport_gpio();
+    gpio26.unexport_gpio();
 }
 
 //--------------------------------------------------------------
@@ -87,19 +111,55 @@ void ofApp::keyPressed(int key) {
         ofLog() << "reset";
         //make the API calls here
         //add a splash screen to let users know its loading?
-        
-        string url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-        if (!response.open(url))
-        {
-            ofLogNotice("ofApp::keyPressed") << "Failed to parse JSON";
-        }
-        cout << response["query"]["count"].asInt() << endl;
-
+        startGame();
+        currentUID = UID;
         UID = "";
     } else {
         UID += key;
     }
     ofLog() << UID;
+}
+
+void ofApp::startGame(){
+    gamePlayer1.start();
+    currentGame = 1;
+}
+
+void ofApp::setScore(string userID, float theScore, string fieldID, string sign){
+    /**
+    adds to the final score
+    **/
+    ofxJSONElement response;
+    string scoreString = ofToString(floor(theScore));
+    cout << scoreString << endl;
+    string url = "https://cp.intellifest.com/api/mh1uo7i0zwnopqfr9awo7j1ihmukrzfrnuzop4ylpgvw8kt9fcikr1am3c45z5mie3o233zub22tvs4i/project/comicconsd2016/setticketmiscfield?&uid=" + userID + "&miscfieldid=" + fieldID + "&value=" + sign +  scoreString;
+    cout << url << endl;
+    if (!response.open(url))
+    {
+        ofLogNotice("ofApp::keyPressed") << "Failed to parse JSON";
+        // this is where we prompt the user to scan again?
+    }
+    ofLog() << "score submitted";
+    ofLog() << response;
+}
+
+void ofApp::setupGPIO(){
+    gpio17.setup("17");
+    gpio17.export_gpio();
+    gpio17.setdir_gpio("in");
+    
+    gpio18.setup("18");
+    gpio18.export_gpio();
+    gpio18.setdir_gpio("in");
+    
+    gpio26.setup("26");
+    gpio26.export_gpio();
+    gpio26.setdir_gpio("in");
+}
+
+void ofApp::resetGame(){
+    score = 0;
+    currentGame = 0;
 }
 
 //--------------------------------------------------------------

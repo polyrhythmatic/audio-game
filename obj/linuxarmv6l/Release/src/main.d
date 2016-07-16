@@ -416,7 +416,6 @@ obj/linuxarmv6l/Release/src/main.o: \
  /home/pi/openFrameworks/addons/ofxGPIO/src/spi.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/SPI2.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/rpiPWM1.h \
- /home/pi/openFrameworks/addons/ofxGPIO/src/font.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/ReadRawData.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/GETGoogleImage.h \
  /home/pi/openFrameworks/addons/ofxGPIO/src/LED.h \
@@ -1298,8 +1297,6 @@ obj/linuxarmv6l/Release/src/main.o: \
 /home/pi/openFrameworks/addons/ofxGPIO/src/SPI2.h:
 
 /home/pi/openFrameworks/addons/ofxGPIO/src/rpiPWM1.h:
-
-/home/pi/openFrameworks/addons/ofxGPIO/src/font.h:
 
 /home/pi/openFrameworks/addons/ofxGPIO/src/ReadRawData.h:
 
