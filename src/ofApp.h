@@ -26,7 +26,7 @@ class ofApp : public ofBaseApp{
         void gotMessage(ofMessage msg);
     
         void startGame();
-        void setScore(string userID, float theScore, string fieldID, string sign);
+        void setScore(string userID, float theScore, string fieldID, string assignmenttype);
         int score;
     
         void setupGPIO();

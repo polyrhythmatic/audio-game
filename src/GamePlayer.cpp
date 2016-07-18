@@ -13,6 +13,7 @@ void GamePlayer::setup(string directory, int num){
     currentSampleName = "intro";
     currentSample = &intro;
     gameOver = false;
+    choice = 0;
 }
 
 void GamePlayer::start(){
@@ -35,7 +36,20 @@ void GamePlayer::update(){
 
 int GamePlayer::finalScore(){
     float score = 0.0;
-    score = round(500.0 * ofRandom(1.0) + (-50.0 * ofRandom(2.0, 5.0)));
+    if(gameNum == 1){
+        if(choice == 1){
+            score = -500;
+        } else if(choice == 2){
+            score = 1000;
+        }
+    } else if(gameNum == 2){
+        if(choice == 1){
+            score = -500;
+        } else if(choice == 2){
+            score = 250;
+        }
+
+    }
     return ofToInt(ofToString(floor(score)));
 }
 
@@ -49,8 +63,10 @@ void GamePlayer::decisionTree(int button){
     if(currentSampleName == "intro"){
         cout << "in the decision tree" << endl;
         if(button == 1){
+            choice = 1;
             playSound(choiceA, "choiceA");
         } else if (button == 0){
+            choice = 2;
             playSound(choiceB, "choiceB");
         }
     }

@@ -31,6 +31,7 @@ class GamePlayer {
         
         string currentSampleName;
         ofSoundPlayer * currentSample;
+        int choice;
     
         float choice1a[2];
         float choice1b[2];

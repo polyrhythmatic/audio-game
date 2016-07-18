@@ -18,7 +18,7 @@ void ofApp::setup(){
     
     gamePlayer1.setup("first", 1);
     gamePlayer2.setup("second", 2);
-    gamePlayer3.setup("third", 3);
+//    gamePlayer3.setup("third", 3);
     
     currentGame = 0;
     currentGamePlayer = &gamePlayer1;
@@ -47,20 +47,16 @@ void ofApp::update() {
         button = 0;
         cout<<"you chose button B"<<endl;
     }
-    
     if(button != -1 && !(currentGamePlayer->isPlaying())){
         if(currentGame == 1){
             gamePlayer1.decisionTree(button);
         } else if(currentGame == 2){
             gamePlayer2.decisionTree(button);
-        } else if(currentGame == 3){
-            gamePlayer3.decisionTree(button);
         }
     }
     
     gamePlayer1.update();
     gamePlayer2.update();
-    gamePlayer3.update();
     
     if(gamePlayer1.isOver() && currentGame == 1){
         currentGame = 2;
@@ -68,23 +64,20 @@ void ofApp::update() {
         gamePlayer2.start();
         score += gamePlayer1.finalScore();
     } else if(gamePlayer2.isOver() && currentGame == 2){
-        currentGame = 3;
-        currentGamePlayer = &gamePlayer3;
-        gamePlayer3.start();
-        score += gamePlayer2.finalScore();
-    } else if(gamePlayer3.isOver() && currentGame == 3){
         currentGame = 0;
         currentGamePlayer = &gamePlayer1;
-        score += gamePlayer3.finalScore();
-        ofLog() << score;
-        setScore(currentUID, score, "81", "+");
-        setScore(currentUID, score, "77", "");
+        score += gamePlayer2.finalScore();
+        
+        setScore(currentUID, score, "81", "balance");
+        setScore(currentUID, score, "77", "assign");
+        setScore(currentUID, gamePlayer1.finalScore(), "83", "assign");
+        setScore(currentUID, gamePlayer2.finalScore(), "85", "assign");
+        ofLog() << gamePlayer2.finalScore();
+        ofLog() << gamePlayer1.finalScore();
         score = 0;
         currentUID = "";
         gamePlayer1.resetPlayer();
         gamePlayer2.resetPlayer();
-        gamePlayer3.resetPlayer();
-        //do something with the end here
     }
     
     if(currentGamePlayer->isPlaying() && noise.isPlaying()){
@@ -125,14 +118,14 @@ void ofApp::startGame(){
     currentGame = 1;
 }
 
-void ofApp::setScore(string userID, float theScore, string fieldID, string sign){
+void ofApp::setScore(string userID, float theScore, string fieldID, string assignmenttype){
     /**
     adds to the final score
     **/
     ofxJSONElement response;
     string scoreString = ofToString(floor(theScore));
     cout << scoreString << endl;
-    string url = "https://cp.intellifest.com/api/mh1uo7i0zwnopqfr9awo7j1ihmukrzfrnuzop4ylpgvw8kt9fcikr1am3c45z5mie3o233zub22tvs4i/project/comicconsd2016/setticketmiscfield?&uid=" + userID + "&miscfieldid=" + fieldID + "&value=" + sign +  scoreString;
+    string url = "https://cp.intellifest.com/api/mh1uo7i0zwnopqfr9awo7j1ihmukrzfrnuzop4ylpgvw8kt9fcikr1am3c45z5mie3o233zub22tvs4i/project/comicconsd2016/setticketmiscfield?&uid=" + userID + "&miscfieldid=" + fieldID + "&value=" + scoreString + "&assignmenttype=" + assignmenttype;
     cout << url << endl;
     if (!response.open(url))
     {
@@ -178,6 +171,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    std::exit(1);
 }
 
 //--------------------------------------------------------------
