@@ -153,6 +153,10 @@ void ofApp::setupGPIO(){
 void ofApp::resetGame(){
     score = 0;
     currentGame = 0;
+    gamePlayer1.stopAll();
+    gamePlayer2.stopAll();
+    gamePlayer1.resetPlayer();
+    gamePlayer2.resetPlayer();
 }
 
 //--------------------------------------------------------------
