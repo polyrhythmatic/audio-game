@@ -125,7 +125,7 @@ void ofApp::setScore(string userID, float theScore, string fieldID, string assig
     ofxJSONElement response;
     string scoreString = ofToString(floor(theScore));
     cout << scoreString << endl;
-    string url = "https://cp.intellifest.com/api/mh1uo7i0zwnopqfr9awo7j1ihmukrzfrnuzop4ylpgvw8kt9fcikr1am3c45z5mie3o233zub22tvs4i/project/comicconsd2016/setticketmiscfield?&uid=" + userID + "&miscfieldid=" + fieldID + "&value=" + scoreString + "&assignmenttype=" + assignmenttype;
+    string url = "http://10.102.10.202/api/mh1uo7i0zwnopqfr9awo7j1ihmukrzfrnuzop4ylpgvw8kt9fcikr1am3c45z5mie3o233zub22tvs4i/project/ftwd2016/setticketmiscfield?&uid=" + userID + "&miscfieldid=" + fieldID + "&value=" + scoreString + "&assignmenttype=" + assignmenttype;
     cout << url << endl;
     if (!response.open(url))
     {
